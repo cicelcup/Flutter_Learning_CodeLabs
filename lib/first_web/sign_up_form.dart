@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercodelabs/general/app_dimensions.dart';
+import 'package:fluttercodelabs/general/app_strings.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -12,6 +14,10 @@ class _SignUpFormState extends State<SignUpForm> {
 
   double _formProgress = 0;
 
+  void _showWelcomeScreen() {
+    Navigator.pushNamed(context, AppStrings.welcomeScreenRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -21,21 +27,21 @@ class _SignUpFormState extends State<SignUpForm> {
           LinearProgressIndicator(value: _formProgress),
           Text('Sign up', style: Theme.of(context).textTheme.headline4),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _firstNameTextController,
               decoration: InputDecoration(hintText: 'First name'),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _lastNameTextController,
               decoration: InputDecoration(hintText: 'Last name'),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _usernameTextController,
               decoration: InputDecoration(hintText: 'Username'),
@@ -44,7 +50,7 @@ class _SignUpFormState extends State<SignUpForm> {
           FlatButton(
             color: Colors.blue,
             textColor: Colors.white,
-            onPressed: null,
+            onPressed: _showWelcomeScreen,
             child: Text('Sign up'),
           ),
         ],
