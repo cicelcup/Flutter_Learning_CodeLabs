@@ -11,6 +11,8 @@ environment:
 dependencies:
   # List of english words
   english_words: ^3.1.5
+  # Provider
+  provider: ^4.3.2+1
   flutter:
     sdk: flutter
 
