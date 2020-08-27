@@ -19,6 +19,8 @@ class MainScreen extends StatelessWidget {
               return Column(
                 children: [
                   ListTile(
+                    onTap: () =>
+                        Navigator.pushNamed(context, codeLabsList[index].route),
                     leading: CircleAvatar(
                       child: Text("${index + 1}"),
                     ),
