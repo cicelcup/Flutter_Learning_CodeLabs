@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercodelabs/first_web/animated_indicator.dart';
 import 'package:fluttercodelabs/general/app_dimensions.dart';
 import 'package:fluttercodelabs/general/app_strings.dart';
 import 'package:fluttercodelabs/general/app_strings_i18n.dart';
@@ -42,7 +43,7 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          LinearProgressIndicator(value: _formProgress),
+          AnimatedIndicator(value: _formProgress),
           Text(AppStringsI18N.signUpLabel,
               style: Theme.of(context).textTheme.headline4),
           Padding(

@@ -5,9 +5,6 @@ class AppDimensions {
   /*Theme*/
   static const dividerThickness = 4.0;
 
-  /*Main Screen*/
-  static final listPadding = const EdgeInsets.all(8.0);
-
   /*First web app screen*/
   static const textFieldPadding = EdgeInsets.all(8.0);
 }
