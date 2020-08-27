@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercodelabs/general/app_routes.dart';
 import 'package:fluttercodelabs/general/app_strings.dart';
 import 'package:fluttercodelabs/general/app_strings_i18n.dart';
 import 'package:fluttercodelabs/general/app_theme.dart';
-import 'package:fluttercodelabs/main/main_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: AppStringsI18N.appTitle,
-      theme: AppTheme.getMainAppTheme(),
-      routes: {AppStrings.initRoute: (_) => MainScreen()},
+      theme: getMainAppTheme(),
+      routes: getAppRoutes(),
       initialRoute: AppStrings.initRoute,
     );
   }
