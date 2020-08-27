@@ -28,8 +28,7 @@ class WordPairItem extends StatelessWidget {
         _isAlreadySaved ? Icons.favorite : Icons.favorite_border,
         color: AppColors.favoriteColor,
       ),
-      title: Text("${_pair.first.capitalizeFirst()} - "
-          "${_pair.second.capitalizeFirst()}"),
+      title: Text(_pair.getFormatPair()),
       //Save or remove word pairs from favorite list
       onTap: () {
         if (_isAlreadySaved)
