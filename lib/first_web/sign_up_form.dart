@@ -50,8 +50,8 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _firstNameTextController,
-              decoration:
-                  InputDecoration(hintText: AppStringsI18N.firstNameLabel),
+              decoration: const InputDecoration(
+                  hintText: AppStringsI18N.firstNameLabel),
             ),
           ),
           Padding(
@@ -59,7 +59,7 @@ class _SignUpFormState extends State<SignUpForm> {
             child: TextFormField(
               controller: _lastNameTextController,
               decoration:
-                  InputDecoration(hintText: AppStringsI18N.lastNameLabel),
+                  const InputDecoration(hintText: AppStringsI18N.lastNameLabel),
             ),
           ),
           Padding(
@@ -67,14 +67,14 @@ class _SignUpFormState extends State<SignUpForm> {
             child: TextFormField(
               controller: _usernameTextController,
               decoration:
-                  InputDecoration(hintText: AppStringsI18N.userNameLabel),
+                  const InputDecoration(hintText: AppStringsI18N.userNameLabel),
             ),
           ),
           FlatButton(
             color: Colors.blue,
             textColor: Colors.white,
             onPressed: _formProgress == 1 ? _showWelcomeScreen : null,
-            child: Text(AppStringsI18N.signUpLabel),
+            child: const Text(AppStringsI18N.signUpLabel),
           ),
         ],
       ),

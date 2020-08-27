@@ -7,6 +7,7 @@ class AppStringsI18N {
   /*CodeLabs Titles*/
   static const String codeLabTitle1 = "Your first flutter app";
   static const String codeLabTitle2 = "Your first flutter web app";
+  static const String codeLabTitle3 = "Friendly Chat";
 
   /*First App Screen*/
   static const String favoritePairScreenAppBarTitle = "Favorite pairs";
