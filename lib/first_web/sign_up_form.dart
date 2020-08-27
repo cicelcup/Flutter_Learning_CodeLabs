@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercodelabs/general/app_dimensions.dart';
 import 'package:fluttercodelabs/general/app_strings.dart';
+import 'package:fluttercodelabs/general/app_strings_i18n.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -14,44 +15,65 @@ class _SignUpFormState extends State<SignUpForm> {
 
   double _formProgress = 0;
 
-  void _showWelcomeScreen() {
-    Navigator.pushNamed(context, AppStrings.welcomeScreenRoute);
+  void _showWelcomeScreen() =>
+      Navigator.pushNamed(context, AppStrings.welcomeScreenRoute);
+
+  //update the progress of the lineal progress indicator
+  void _updateProgress() {
+    var progress = 0.0;
+    var controllers = [
+      _firstNameTextController,
+      _lastNameTextController,
+      _usernameTextController
+    ];
+
+    //Check the value for each controller
+    for (var controller in controllers) {
+      if (controller.value.text.isNotEmpty) progress += 1 / controllers.length;
+    }
+
+    setState(() => _formProgress = progress);
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      onChanged: _updateProgress,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           LinearProgressIndicator(value: _formProgress),
-          Text('Sign up', style: Theme.of(context).textTheme.headline4),
+          Text(AppStringsI18N.signUpLabel,
+              style: Theme.of(context).textTheme.headline4),
           Padding(
             padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _firstNameTextController,
-              decoration: InputDecoration(hintText: 'First name'),
+              decoration:
+                  InputDecoration(hintText: AppStringsI18N.firstNameLabel),
             ),
           ),
           Padding(
             padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _lastNameTextController,
-              decoration: InputDecoration(hintText: 'Last name'),
+              decoration:
+                  InputDecoration(hintText: AppStringsI18N.lastNameLabel),
             ),
           ),
           Padding(
             padding: AppDimensions.textFieldPadding,
             child: TextFormField(
               controller: _usernameTextController,
-              decoration: InputDecoration(hintText: 'Username'),
+              decoration:
+                  InputDecoration(hintText: AppStringsI18N.userNameLabel),
             ),
           ),
           FlatButton(
             color: Colors.blue,
             textColor: Colors.white,
-            onPressed: _showWelcomeScreen,
-            child: Text('Sign up'),
+            onPressed: _formProgress == 1 ? _showWelcomeScreen : null,
+            child: Text(AppStringsI18N.signUpLabel),
           ),
         ],
       ),

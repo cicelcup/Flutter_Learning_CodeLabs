@@ -2,8 +2,8 @@
 class AppStrings {
   /*routes*/
   static const String initRoute = "/";
-  static const String route1 = "/route_1";
-  static const String route2 = "/route_2";
-  static const String favoriteListRoute = "/favorite_pair";
+  static const String route1 = "/route1";
+  static const String route2 = "/route2";
+  static const String favoriteListRoute = "/favorite";
   static const String welcomeScreenRoute = "/welcome";
 }
