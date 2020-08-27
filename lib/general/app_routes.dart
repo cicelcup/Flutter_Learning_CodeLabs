@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 getAppRoutes() {
   return {
     AppStrings.initRoute: (_) => MainScreen(),
-    AppStrings.route1: (_) => Provider(
+    AppStrings.route1: (_) => ChangeNotifierProvider(
           create: (context) => FirstAppProvider(),
           child: FirstApp(),
         ),

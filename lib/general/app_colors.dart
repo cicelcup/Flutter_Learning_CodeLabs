@@ -5,4 +5,5 @@ class AppColors {
   static const Color primarySwatch = Colors.deepOrange;
   static const Color accent = Colors.indigo;
   static const Color secondaryColor = Colors.lightGreenAccent;
+  static const Color favoriteColor = Colors.red;
 }

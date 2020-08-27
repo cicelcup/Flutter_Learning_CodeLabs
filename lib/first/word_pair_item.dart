@@ -1,6 +1,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttercodelabs/first/provider/first_app_provider.dart';
+import 'package:fluttercodelabs/general/app_colors.dart';
 import 'package:fluttercodelabs/general/app_extensions.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,8 @@ class WordPairItem extends StatelessWidget {
     final _provider = Provider.of<FirstAppProvider>(context);
     final WordPair _pair = _provider.suggestions[index];
 
-    final _isAlreadySaved = false;
+    //check if the word is already saved in the set
+    final _isAlreadySaved = _provider.savedWords.contains(_pair);
 
     return ListTile(
       leading: Icon(
@@ -24,10 +26,17 @@ class WordPairItem extends StatelessWidget {
       ),
       trailing: Icon(
         _isAlreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: Theme.of(context).accentColor,
+        color: AppColors.favoriteColor,
       ),
       title: Text("${_pair.first.capitalizeFirst()} - "
           "${_pair.second.capitalizeFirst()}"),
+      //Save or remove word pairs from favorite list
+      onTap: () {
+        if (_isAlreadySaved)
+          _provider.removeFavorite(_pair);
+        else
+          _provider.addFavorite(_pair);
+      },
     );
   }
 }

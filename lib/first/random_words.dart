@@ -7,13 +7,14 @@ import 'package:provider/provider.dart';
 class RandomWords extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _provider = Provider.of<FirstAppProvider>(context);
-    final _length = _provider.suggestions.length;
+    final _length = context.select<FirstAppProvider, int>(
+        (provider) => provider.suggestions.length);
 
     return ListView.builder(itemBuilder: (_, index) {
       if (index.isOdd) return Divider();
       //Check the length of the list and add new words
-      if (index >= _length) _provider.addSuggestions();
+      if (index >= _length)
+        Provider.of<FirstAppProvider>(context, listen: false).addSuggestions();
       return WordPairItem(index: index);
     });
   }
