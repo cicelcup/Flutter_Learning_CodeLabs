@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 class FirstAppProvider extends ChangeNotifier {
   final List<WordPair> suggestions = <WordPair>[];
 
-  final savedWords = Set<WordPair>();
+  final savedWords = <WordPair>{};
 
   //add 10 additional suggestions to the list
-  addSuggestions() => suggestions.addAll(generateWordPairs().take(10));
+  void addSuggestions() => suggestions.addAll(generateWordPairs().take(10));
 
-  addFavorite(WordPair pair) {
+  void addFavorite(WordPair pair) {
     savedWords.add(pair);
     notifyListeners();
   }
 
-  removeFavorite(WordPair pair) {
+  void removeFavorite(WordPair pair) {
     savedWords.remove(pair);
     notifyListeners();
   }

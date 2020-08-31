@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:fluttercodelabs/chat/chat_screen.dart';
 import 'package:fluttercodelabs/first/favorite_pair_screen.dart';
 import 'package:fluttercodelabs/first/first_app_screen.dart';
@@ -7,7 +8,7 @@ import 'package:fluttercodelabs/general/app_strings.dart';
 import 'package:fluttercodelabs/main/main_screen.dart';
 
 //Routes of the app
-getAppRoutes() {
+Map<String, StatelessWidget Function(BuildContext _)> getAppRoutes() {
   return {
     AppStrings.initRoute: (_) => MainScreen(),
     AppStrings.route1: (_) => FirstAppScreen(),
