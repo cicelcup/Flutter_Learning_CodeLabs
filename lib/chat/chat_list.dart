@@ -6,7 +6,7 @@ class ChatList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Provider where it stores the messages list
-    final _messages = Provider.of<ChatProvider>(context).messages;
+    final _chatMessages = Provider.of<ChatProvider>(context).chatMessages;
     return InputDecorator(
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -19,15 +19,21 @@ class ChatList extends StatelessWidget {
       ),
       child: ListView.builder(
         reverse: true,
-        itemCount: _messages.length,
+        itemCount: _chatMessages.length,
         itemBuilder: (_, index) {
-          return ListTile(
-            visualDensity: VisualDensity(vertical: -2.0),
-            leading: CircleAvatar(
-              child: Icon(Icons.toys),
+          return SizeTransition(
+            sizeFactor: CurvedAnimation(
+              parent: _chatMessages[index].animationController,
+              curve: Curves.easeOut,
             ),
-            title: Text(_messages[index]),
-            subtitle: Text('Jorge Augusto'),
+            child: ListTile(
+              //visualDensity: VisualDensity(vertical: -2.0),
+              leading: CircleAvatar(
+                child: Icon(Icons.toys),
+              ),
+              title: Text(_chatMessages[index].message),
+              subtitle: Text(_chatMessages[index].sender),
+            ),
           );
         },
       ),

@@ -13,7 +13,7 @@ class SenderBox extends StatefulWidget {
   _SenderBoxState createState() => _SenderBoxState();
 }
 
-class _SenderBoxState extends State<SenderBox> {
+class _SenderBoxState extends State<SenderBox> with TickerProviderStateMixin {
   final _controller = TextEditingController(); //Text Field Controller.
 
   @override
@@ -32,7 +32,10 @@ class _SenderBoxState extends State<SenderBox> {
 
     //Send Message, clear the controller and request focus for the text field.
     void sendMessage() {
-      _provider.addMessage(_controller.text);
+      //set the animation controller inside the list
+      var animation =
+          AnimationController(duration: Duration(seconds: 1), vsync: this);
+      _provider.addMessage(_controller.text, animation);
       _controller.clear();
       _focusNode.requestFocus();
     }
