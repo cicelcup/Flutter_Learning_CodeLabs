@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercodelabs/chat/sender_box.dart';
 import 'package:fluttercodelabs/general/app_dimensions.dart';
 import 'package:fluttercodelabs/general/app_strings_i18n.dart';
+
+import 'chat_list.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -15,22 +18,11 @@ class ChatScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.5),
-                borderRadius: AppDimensions.sendContainerBorder,
-              ),
-              padding: AppDimensions.sendContainerPadding,
-              child: Row(
-                children: [
-                  Expanded(child: TextField()),
-                  IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: () {},
-                  )
-                ],
-              ),
+            Expanded(child: ChatList()),
+            SizedBox(
+              height: 24.0,
             ),
+            SenderBox(),
           ],
         ),
       ),

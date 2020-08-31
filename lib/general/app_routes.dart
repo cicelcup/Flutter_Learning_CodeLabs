@@ -8,7 +8,7 @@ import 'package:fluttercodelabs/general/app_strings.dart';
 import 'package:fluttercodelabs/main/main_screen.dart';
 
 //Routes of the app
-Map<String, StatelessWidget Function(BuildContext _)> getAppRoutes() {
+Map<String, StatelessWidget Function(BuildContext context)> getAppRoutes() {
   return {
     AppStrings.initRoute: (_) => MainScreen(),
     AppStrings.route1: (_) => FirstAppScreen(),
