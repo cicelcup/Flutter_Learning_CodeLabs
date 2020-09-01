@@ -16,6 +16,9 @@ class SenderBox extends StatefulWidget {
 class _SenderBoxState extends State<SenderBox> with TickerProviderStateMixin {
   final _controller = TextEditingController(); //Text Field Controller.
 
+  //var to control the send button.
+  var isNotEmptyMessage = false;
+
   @override
   void dispose() {
     _controller.dispose();
@@ -38,6 +41,7 @@ class _SenderBoxState extends State<SenderBox> with TickerProviderStateMixin {
       _provider.addMessage(_controller.text, animation);
       _controller.clear();
       _focusNode.requestFocus();
+      setState(() => isNotEmptyMessage = false);
     }
 
     return Container(
@@ -52,6 +56,11 @@ class _SenderBoxState extends State<SenderBox> with TickerProviderStateMixin {
             child: TextField(
               focusNode: _focusNode,
               controller: _controller,
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  setState(() => isNotEmptyMessage = true);
+                }
+              },
               //add the message to the list.
               onSubmitted: (value) => sendMessage(),
               decoration: InputDecoration(hintText: 'Send a message'),
@@ -59,7 +68,7 @@ class _SenderBoxState extends State<SenderBox> with TickerProviderStateMixin {
           ),
           IconButton(
             icon: Icon(Icons.send),
-            onPressed: sendMessage,
+            onPressed: isNotEmptyMessage ? sendMessage : null,
           )
         ],
       ),
