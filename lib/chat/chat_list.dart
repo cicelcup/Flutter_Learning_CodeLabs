@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercodelabs/chat/chat_message.dart';
 import 'package:fluttercodelabs/chat/chat_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,21 +22,38 @@ class ChatList extends StatelessWidget {
         reverse: true,
         itemCount: _chatMessages.length,
         itemBuilder: (_, index) {
-          return SizeTransition(
-            sizeFactor: CurvedAnimation(
-              parent: _chatMessages[index].animationController,
-              curve: Curves.easeOut,
-            ),
-            child: ListTile(
-              //visualDensity: VisualDensity(vertical: -2.0),
-              leading: CircleAvatar(
-                child: Icon(Icons.toys),
-              ),
-              title: Text(_chatMessages[index].message),
-              subtitle: Text(_chatMessages[index].sender),
-            ),
-          );
+          return ListTileMessage(chatMessage: _chatMessages[index]);
         },
+      ),
+    );
+  }
+}
+
+class ListTileMessage extends StatelessWidget {
+  final ChatMessage chatMessage;
+
+  const ListTileMessage({Key key, this.chatMessage}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: CurvedAnimation(
+        parent: chatMessage.animationController,
+        curve: Curves.easeInCubic,
+      ),
+      child: SizeTransition(
+        sizeFactor: CurvedAnimation(
+          parent: chatMessage.animationController,
+          curve: Curves.easeOut,
+        ),
+        child: ListTile(
+          visualDensity: VisualDensity(vertical: -2.0),
+          leading: CircleAvatar(
+            child: Icon(Icons.toys),
+          ),
+          title: Text(chatMessage.message),
+          subtitle: Text(chatMessage.sender),
+        ),
       ),
     );
   }
