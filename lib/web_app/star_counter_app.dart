@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercodelabs/general/app_strings.dart';
 import 'package:fluttercodelabs/web_app/git_hub_counter.dart';
 import 'package:fluttercodelabs/web_app/star_counter_provider.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,14 @@ class StarCounterApp extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 32.0),
                     child: GitHubCounter(),
+                  ),
+                  SizedBox(height: 8.0),
+                  FlatButton(
+                    color: Colors.transparent,
+                    textColor: Colors.blue,
+                    child: Text('Privacy Policy'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppStrings.webPolicy),
                   ),
                 ],
               ),
