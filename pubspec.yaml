@@ -13,6 +13,9 @@ dependencies:
   english_words: ^3.1.5
   # Provider
   provider: ^4.3.2+1
+  #GitHub
+  github: ^7.0.1
+  intl: ^0.16.1
   flutter:
     sdk: flutter
 

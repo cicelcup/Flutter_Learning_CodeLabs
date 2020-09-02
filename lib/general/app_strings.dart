@@ -7,4 +7,5 @@ class AppStrings {
   static const String chatRoute = '/chat';
   static const String favoriteListRoute = '/favorite';
   static const String welcomeScreenRoute = '/welcome';
+  static const String starCounter = '/star';
 }
