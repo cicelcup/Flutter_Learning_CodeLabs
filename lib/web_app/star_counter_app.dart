@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 class StarCounterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _provider = Provider.of<StartCounterProvider>(context);
     return Scaffold(
       body: Center(
         child: ConstrainedBox(
@@ -29,13 +28,13 @@ class StarCounterApp extends StatelessWidget {
                       labelText: 'Enter a GitHub repository',
                       hintText: 'flutter/flutter',
                     ),
-                    onSubmitted: _provider.changeRepository,
+                    onSubmitted: Provider.of<StartCounterProvider>(context,
+                            listen: false)
+                        .changeRepositoryName,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 32.0),
-                    child: GitHubCounter(
-                      repositoryName: _provider.repositoryName,
-                    ),
+                    child: GitHubCounter(),
                   ),
                 ],
               ),

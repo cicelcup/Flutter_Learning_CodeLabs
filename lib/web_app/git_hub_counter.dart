@@ -1,85 +1,52 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:github/github.dart';
-import 'package:intl/intl.dart';
+import 'package:fluttercodelabs/web_app/star_counter_provider.dart';
+import 'package:provider/provider.dart';
 
-class GitHubCounter extends StatefulWidget {
-  final String repositoryName;
-
-  GitHubCounter({@required this.repositoryName});
-
-  @override
-  _GitHubCounterState createState() => _GitHubCounterState();
-}
-
-class _GitHubCounterState extends State<GitHubCounter> {
-  // The GitHub API client
-  GitHub github;
-
-  // The repository information
-  Repository repository;
-
-  // A human-readable error when the repository isn't found.
-  String errorMessage;
-
-  @override
-  void initState() {
-    super.initState();
-    github = GitHub();
-
-    fetchRepository();
-  }
-
-  @override
-  void didUpdateWidget(GitHubCounter oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    // When this widget's [repositoryName] changes,
-    // load the Repository information.
-    if (widget.repositoryName == oldWidget.repositoryName) {
-      return;
-    }
-
-    fetchRepository();
-  }
-
-  Future<void> fetchRepository() async {
-    setState(() {
-      repository = null;
-      errorMessage = null;
-    });
-
-    var repo = await github.repositories
-        .getRepository(RepositorySlug.full(widget.repositoryName));
-    setState(() {
-      repository = repo;
-    });
-  }
-
+class GitHubCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final textStyle = textTheme.headline4.apply(color: Colors.green);
-    final errorStyle = textTheme.bodyText1.apply(color: Colors.red);
-    final numberFormat = NumberFormat.decimalPattern();
+    //Provider variable.
+    final _provider = Provider.of<StartCounterProvider>(context);
+    //Style for the result.
+    final textStyle =
+        Theme.of(context).textTheme.headline4.apply(color: Colors.green);
+    //Style for the error.
+    final errorStyle =
+        Theme.of(context).textTheme.bodyText1.apply(color: Colors.red);
 
-    if (errorMessage != null) {
-      return Text(errorMessage, style: errorStyle);
-    }
+    ///Future Builder to search the repository.
+    ///
+    ///Search only if the repository name is different than null
+    return FutureBuilder(
+        future: _provider.repositoryName != null
+            ? _provider.searchRepository()
+            : null,
+        builder: (context, AsyncSnapshot snapShot) {
+          print(snapShot);
 
-    if (widget.repositoryName != null &&
-        widget.repositoryName.isNotEmpty &&
-        repository == null) {
-      return Text('loading...');
-    }
+          //Check each case of the snapShot
+          switch (snapShot.connectionState) {
+            //Show the progress indicator.
+            case ConnectionState.waiting:
+              return ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 200.0),
+                child: LinearProgressIndicator(),
+              );
 
-    if (repository == null) {
-      // If no repository is entered, return an empty widget.
-      return SizedBox();
-    }
+            //Check the snapshot
+            case ConnectionState.done:
+              if (snapShot.hasError || !snapShot.hasData) {
+                return Text('Error: ${_provider.repositoryName} not found it!',
+                    style: errorStyle);
+              }
+              return Text(snapShot.data, style: textStyle);
 
-    return Text(
-      '${numberFormat.format(repository.stargazersCount)}',
-      style: textStyle,
-    );
+            //Show sizeBox as default value.
+            default:
+              return SizedBox();
+          }
+        });
   }
 }
